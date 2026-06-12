@@ -1,0 +1,14 @@
+# Ignore dependency charts
+charts/*/charts/
+charts/*/tmpcharts/
+charts/*/*.tgz
+
+# Terraform / Terragrunt
+.terraform/
+.terragrunt-cache/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Environment
+.env
