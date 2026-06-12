@@ -1,0 +1,38 @@
+# Default values for the monitoring-stack wrapper chart.
+# These values will override the defaults in the kube-prometheus-stack subchart.
+
+kube-prometheus-stack:
+  grafana:
+    enabled: true
+    ingress:
+      enabled: false # Set to true to use Nginx Ingress
+    persistence:
+      enabled: true
+      size: 10Gi
+    
+    # Injecting Secrets as Environment Variables
+    envFromSecret: grafana-db-creds
+
+    grafana.ini:
+      database:
+        type: postgres
+        host: bootcamp-postgres-tmp-jkr.postgres.database.azure.com:5432
+        name: grafana
+        user: psqladmin
+        # Referencing the environment variable injected from the secret
+        password: "$__env{GF_DATABASE_PASSWORD}"
+        ssl_mode: require
+
+  prometheus:
+    enabled: true
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
+
+  alertmanager:
+    enabled: false # Disabled by default for simplicity in bootcamp
