@@ -1,11 +1,14 @@
 apiVersion: v2
 name: monitoring-stack
-description: A unified Helm chart for Prometheus and Grafana.
+description: A unified Helm chart for Prometheus, Grafana, and Postgres Exporter.
 type: application
-version: 0.1.0
+version: 0.3.0
 appVersion: "v0.75.0"
 
 dependencies:
   - name: kube-prometheus-stack
     version: 61.3.2
+    repository: https://prometheus-community.github.io/helm-charts
+  - name: prometheus-postgres-exporter
+    version: 6.0.0
     repository: https://prometheus-community.github.io/helm-charts

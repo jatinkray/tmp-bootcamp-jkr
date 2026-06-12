@@ -39,3 +39,26 @@ kube-prometheus-stack:
 
   alertmanager:
     enabled: false # Disabled by default for simplicity in bootcamp
+
+prometheus-postgres-exporter:
+  enabled: true
+  config:
+    datasource:
+      host: bootcamp-postgres-tmp-jkr.postgres.database.azure.com
+      user: psqladmin
+      # Leave password blank here as we will inject the full connection string via ENV
+      password: "" 
+      sslmode: require
+  
+  # Inject the password from the secret via environment variable
+  env:
+    - name: DATA_SOURCE_PASS
+      valueFrom:
+        secretKeyRef:
+          name: grafana-db-creds
+          key: GF_DATABASE_PASSWORD
+  
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    interval: 30s
