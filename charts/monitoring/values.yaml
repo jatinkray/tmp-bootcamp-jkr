@@ -5,7 +5,10 @@ kube-prometheus-stack:
   grafana:
     enabled: true
     ingress:
-      enabled: false # Set to true to use Nginx Ingress
+      enabled: true
+      ingressClassName: webapprouting.kubernetes.azure.com
+      path: /
+      hosts: []
     persistence:
       enabled: true
       size: 10Gi
