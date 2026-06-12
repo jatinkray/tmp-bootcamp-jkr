@@ -1,0 +1,8 @@
+# Default values for the ArgoCD wrapper chart.
+# These values will override the defaults in the argo-cd subchart.
+
+argo-cd:
+  server:
+    ingress:
+      enabled: false # Set to true to use Nginx Ingress
+      # ingressClassName: web-app-routing
