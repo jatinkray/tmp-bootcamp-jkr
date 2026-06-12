@@ -62,3 +62,5 @@ prometheus-postgres-exporter:
     enabled: true
     namespace: monitoring
     interval: 30s
+    labels:
+      release: monitoring

@@ -36,8 +36,7 @@ resource "random_id" "suffix" {
 
 resource "random_password" "postgres" {
   length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  special          = false
 }
 
 module "postgresql" {
@@ -67,4 +66,9 @@ output "postgresql_fqdn" {
 
 output "aks_cluster_name" {
   value = module.aks.cluster_name
+}
+
+output "postgres_password" {
+  value     = random_password.postgres.result
+  sensitive = true
 }
